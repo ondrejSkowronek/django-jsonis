@@ -17,9 +17,10 @@ class JSONTestClient(Client):
         """Only changing content_type default value"""
         return super(JSONTestClient, self).post(path, content_type=content_type, **kwargs)
 
-    def put(self, path, content_type='application/json; charset=utf-8', **kwargs):
+    def put(self, path, content_type='application/json; charset=utf-8', data=None, **kwargs):
         """Only changing content_type default value"""
-        return super(JSONTestClient, self).put(path, content_type=content_type, **kwargs)
+        return super(JSONTestClient, self).put(
+            path, content_type=content_type, data=self._encode_data(data, content_type), **kwargs)
 
 class JSONTestCase(TestCase):
     client_class = JSONTestClient
